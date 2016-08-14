@@ -1,0 +1,4 @@
+<div class="{{ class_name }}" style="width: {{ width }}; height: {{ height }}">
+    <div class="ace-editor-frame" data-lang="{{ default_lang }}" data-theme="{{ default_theme }}"
+         {% if read_only %}data-ro="yes"{% endif %}>{{ code }}</div>
+</div>
