@@ -18,7 +18,7 @@ DEFAULT_CONFIG = {'theme': 'monokai',
                   'highlight_active': True}
 
 DEFAULT_ALLOWED_CONFIGURATION = {'enabled': True,
-                                 'lang': [('python','Python',)],
+                                 'lang': [('python', 'Python',)],
                                  'theme': [('eclipse', 'Eclipse',),
                                            ('github', 'GitHub',),
                                            ('monokai', 'Monokai',),
@@ -113,10 +113,9 @@ class AceWidget(forms.Textarea):
                'allow_modif': self._allow_modif}
         if self._allow_modif is True:
             ctx['allowed_lang'] = self._allowed_lang
-            print('ALLOWED:' , ctx['allowed_lang'])
             ctx['allowed_theme'] = self._allowed_theme
             ctx['allowed_fontsize'] = self._allowed_fontsize
-               
+
         template = Template(self._get_template_content())
         context = Context(ctx)
         return mark_safe(template.render(context))
@@ -131,4 +130,4 @@ class AceWidget(forms.Textarea):
 
     @staticmethod
     def _bool_to_str(value):
-        return 'yes' if value else 'no' 
+        return 'yes' if value else 'no'
