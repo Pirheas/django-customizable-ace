@@ -1,4 +1,45 @@
-<div class="{{ class_name }}" style="width: {{ width }}; height: {{ height }}">
-    <div class="ace-editor-frame" data-lang="{{ default_lang }}" data-theme="{{ default_theme }}"
-         {% if read_only %}data-ro="yes"{% endif %}>{{ code }}</div>
+<div>
+    {% if allow_modif %}
+    <div class="{{ class_name }}-options" style="width: {{ width }};">
+        <a href="#" onclick="return false;" class="ace-options-link ace-bottom-arrow" style="float: right;">&#9881;</a>
+        <div class="mclearfix"></div>
+        <div class="ace-editor-frame-options">
+            {% if allowed_lang|length > 1 %}
+            <div class="select-ace-style">
+                <select class="ace-editor-lang-selector">
+                    {% for al in allowed_lang %}
+                    <option value="{{ al.0 }}"{% if al.0 == default_lang %} selected{% endif %}>{{ al|last }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endif %}
+            {% if allowed_theme|length > 1 %}
+            <div class="select-ace-style">
+                <select class="ace-editor-theme-selector">
+                    {% for at in allowed_theme %}
+                    <option value="{{ at.0 }}"{% if at.0 == default_theme %} selected{% endif %}>{{ at|last }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endif %}
+            {% if allowed_fontsize|length > 1 %}
+            <div class="select-ace-style">
+                <select class="ace-editor-fontsize-selector">
+                    {% for afs in allowed_fontsize %}
+                    <option value="{{ afs.0 }}"{% if afs.0 == fontsize %} selected{% endif %}>{{ afs|last }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    <div class="{{ class_name }}" style="width: {{ width }}; height: {{ height }}">
+        <div class="ace-editor-frame" data-lang="{{ default_lang }}" data-theme="{{ default_theme }}"
+             data-fontsize="{{ fontsize }}" data-tabsize="{{ tabsize }}"
+             data-ro="{{ read_only }}" data-softtabs="{{ soft_tabs }}"
+             data-invisibles="{{ show_invisibles }}" data-printmargin="{{ print_margin }}"
+             data-highlight="{{ highlight_active }}">{{ code }}</div>
+         <input type="hidden" name="code" class="hidden-code-value" />
+    </div>
 </div>

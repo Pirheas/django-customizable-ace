@@ -2,4 +2,5 @@ include src/django_customizable_ace/static/django_customizable_ace/js/*.js
 include src/django_customizable_ace/static/django_customizable_ace/css/*.css
 include src/django_customizable_ace/static/django_customizable_ace/ace/*.js
 include src/django_customizable_ace/static/django_customizable_ace/ace/*.css
+include src/django_customizable_ace/static/django_customizable_ace/img/*.gif
 include src/django_customizable_ace/templates/*.html

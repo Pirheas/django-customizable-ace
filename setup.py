@@ -18,7 +18,8 @@ setup(
     package_data={'': ['src/django_customizable_ace/static/django_customizable_ace/js/*.js',
                        'src/django_customizable_ace/static/django_customizable_ace/css/*.css',
                        'src/django_customizable_ace/static/django_customizable_ace/ace/*.js',
-                       'include src/django_customizable_ace/static/django_customizable_ace/ace/*.css',
+                       'src/django_customizable_ace/static/django_customizable_ace/ace/*.css',
+                       'src/django_customizable_ace/static/django_customizable_ace/img/*.gif',
                        'src/django_customizable_ace/templates/*.html']}
 )
 
