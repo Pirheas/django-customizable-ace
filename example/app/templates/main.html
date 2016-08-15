@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ace editor simple example</title>
+    <!-- css -->
+    {{ form.media.css }}
+    <style>
+        .ace-editor{
+          margin: 5px auto;
+          border: 1px solid #DDD;
+          border-radius: 7px;
+        }
+        .ace-editor-options{
+          margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ace editor simple example</h1>
+    <form method="POST" action="{% url 'main' %}">
+    {{ form.code }}
+    <div style="margin: 0 auto; text-align: center;">
+        <input type="submit" value="Submit" />
+    </div>
+    {% csrf_token %}
+    </form>
+    <!-- javascript -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> <!-- Jquery required -->
+    {{ form.media.js }}
+</body>
+</html>
