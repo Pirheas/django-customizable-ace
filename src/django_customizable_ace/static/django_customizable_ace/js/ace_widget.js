@@ -2,11 +2,17 @@ var theme_path = 'ace/theme/';
 var lang_path = 'ace/mode/';
 
 function get_editor(jqobj){
+    /* Find the editor related to a combobox (jqobj) */
     return jqobj.closest('.ace-editor-frame-options').parent().parent().find('.ace-editor-frame').first();
 }
 
 $( document ).ready(function(){
-    /* Init Ace editor */
+    /*Reset all <select> on page loading (some browser may cache this so we want to be sure it's the correct value)*/
+    $('.select-ace-style select').each(function(){
+        $(this).val($(this).find('option[selected]').val());
+    });
+
+    /* Init Ace editor(s) */
     $('.ace-editor-frame').each(function(index){
         var jqeditor = $(this);
         var editor = ace.edit(jqeditor.get(0));

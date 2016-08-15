@@ -12,6 +12,6 @@ Make Ace editor easy to use and configure in django projects
 ## TODO
 * Write documentation (soon™)
 * Add an example (sooner™)
-* Reset comboboxes on refresh
+* ~~Reset comboboxes on refresh~~
 * Better menu for dynamic modification
 * More options for dynamic configuration
