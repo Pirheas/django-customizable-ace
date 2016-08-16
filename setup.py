@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
 from setuptools import setup
-from src.django_customizable_ace import __version__ as current_version
+from src.django_customizable_ace import __version__ as ccv, __author__ as cca
     
 
 setup(
     name='django_customizable_ace',
-    version=current_version,
+    version=ccv,
     description='Allow to easily use Ace editor in your django projects',
     license='4-clause "BSD License"',
-    author='Pirheas',
+    author=cca,
     url='https://github.com/Pirheas/django-customizable-ace',
     packages=['django_customizable_ace'],
     package_dir={'': 'src'},

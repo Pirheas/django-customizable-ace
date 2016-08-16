@@ -1,6 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.template import Template, Context
+from django.forms.utils import flatatt
 from django.utils.safestring import mark_safe
 from django.utils.encoding import force_text
 
@@ -8,8 +9,6 @@ from django.utils.encoding import force_text
 DEFAULT_CONFIG = {'theme': 'monokai',
                   'lang': 'python',
                   'readonly': False,
-                  'width': '700px',
-                  'height': '400px',
                   'soft_tabs': True,
                   'show_invisibles': False,
                   'fontsize': '14px',
@@ -27,15 +26,13 @@ DEFAULT_ALLOWED_CONFIGURATION = {'enabled': True,
                                               ('14px', 'Medium',),
                                               ('16px', 'Large',)]}
 
-class AceWidget(forms.Textarea):
+class AceWidget(forms.Widget):
     def __init__(self, config=None, customizable=None, *args, **kwargs):
         # Config when loading page
         config = config or {}
         self._readonly = bool(self._get_config('readonly', config))
         self._theme = self._get_config('theme', config)
         self._langage = self._get_config('lang', config)
-        self._width = self._get_config('width', config)
-        self._height = self._get_config('height', config)
         self._soft_tabs = bool(self._get_config('soft_tabs', config))
         self._show_invisibles = bool(self._get_config('show_invisibles', config))
         self._fontsize = str(self._get_config('fontsize', config))
@@ -97,10 +94,16 @@ class AceWidget(forms.Textarea):
         return forms.Media(js=js, css=css)
 
     def render(self, name, value, attrs=None):
-        ctx = {'class_name': 'ace-editor',
+        class_name = 'ace-editor'
+        attrs = attrs or {}
+        self.attrs.update(attrs)
+        print('attrs=', self.attrs)
+        if 'class' in self.attrs:
+            class_name = self.attrs.pop('class')
+        flattrs = flatatt(self.attrs)
+        ctx = {'widget_name': name,
+               'class_name': class_name,
                'code': force_text(value or ''),
-               'width': self._width,
-               'height': self._height,
                'default_theme': self._theme.lower(),
                'default_lang': self._langage.lower(),
                'read_only': self._bool_to_str(self._readonly),
@@ -110,7 +113,8 @@ class AceWidget(forms.Textarea):
                'tabsize': self._tabsize,
                'print_margin': self._bool_to_str(self._print_margin),
                'highlight_active': self._bool_to_str(self._highlight_active),
-               'allow_modif': self._allow_modif}
+               'allow_modif': self._allow_modif,
+               'attrs': flattrs}
         if self._allow_modif is True:
             ctx['allowed_lang'] = self._allowed_lang
             ctx['allowed_theme'] = self._allowed_theme

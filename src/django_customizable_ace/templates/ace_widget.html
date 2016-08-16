@@ -1,6 +1,6 @@
-<div>
+<div class="{{ class_name }}" {{ attrs }}>
     {% if allow_modif %}
-    <div class="{{ class_name }}-options" style="width: {{ width }};">
+    <div class="{{ class_name }}-options" style="width: 100%;">
         <a href="#" onclick="return false;" class="ace-options-link ace-bottom-arrow" style="float: right;">&#9881;</a>
         <div class="mclearfix"></div>
         <div class="ace-editor-frame-options">
@@ -34,12 +34,12 @@
         </div>
     </div>
     {% endif %}
-    <div class="{{ class_name }}" style="width: {{ width }}; height: {{ height }}">
+    <div class="{{ class_name }}-textarea">
         <div class="ace-editor-frame" data-lang="{{ default_lang }}" data-theme="{{ default_theme }}"
              data-fontsize="{{ fontsize }}" data-tabsize="{{ tabsize }}"
              data-ro="{{ read_only }}" data-softtabs="{{ soft_tabs }}"
              data-invisibles="{{ show_invisibles }}" data-printmargin="{{ print_margin }}"
              data-highlight="{{ highlight_active }}">{{ code }}</div>
-         <input type="hidden" name="code" class="hidden-code-value" />
+         <input type="hidden" name="{{ widget_name }}" class="hidden-code-value" />
     </div>
 </div>
